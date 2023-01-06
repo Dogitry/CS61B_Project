@@ -47,7 +47,6 @@ public class GetEnvironmentVariables {
             System.out.println("Oops! We couldn't detect your OS. Please reach out to a lab TA or post on Ed so we can help you move forward");
             return;
         }
-
         System.out.println();
         System.out.println("Keep reading the spec to know what to do with this output");
         System.out.println("----------------------------------------------------------");
