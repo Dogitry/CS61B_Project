@@ -107,6 +107,7 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
+        checkGameOver();
         boolean changed;
         changed = false;
         // TODO: Modify this.board (and perhaps this.score) to account
