@@ -107,38 +107,40 @@ public class Model extends Observable {
      *    and the trailing tile does not.
      * */
     public boolean tilt(Side side) {
-        checkGameOver();
         boolean changed;
         changed = false;
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
         Board brd = this.board;
-       brd.setViewingPerspective(side);
-        int size = brd.size();
-        for(int i = 0; i< size; i++) {
-            int moveTo =  size -1;
-            for (int j = size -1; j >= 0 ; j--) {
-                Tile t =  brd.tile(i, j);
-                if(t==null)continue;
-                brd.move(i, moveTo, t);
-                moveTo--;
-                if(j<size-1)changed = true;
-            }
-            for(int j = size -1; j>0; j--){
-                if( brd.tile(i,j)==null)continue;
-                if( brd.tile(i,j-1)==null)continue;
-                if( brd.tile(i,j).value()==  brd.tile(i,j-1).value()){
-                    this.score+=  brd.tile(i,j).value()*2;
-                    brd.move(i,j,  brd.tile(i,j-1));
+        if(maxTileExists(brd)) changed = true;
+        else {
+            brd.setViewingPerspective(side);
+            int size = brd.size();
+            for (int i = 0; i < size; i++) {
+                int moveTo = size - 1;
+                for (int j = size - 1; j >= 0; j--) {
+                    Tile t = brd.tile(i, j);
+                    if (t == null) continue;
+                    brd.move(i, moveTo, t);
+                    moveTo--;
+                    if (j < size - 1) changed = true;
                 }
-            }
-            moveTo =  size -1;
-            for (int j = size -1; j >= 0 ; j--) {
-                Tile t =  brd.tile(i, j);
-                if(t==null)continue;
-                brd.move(i, moveTo, t);
-                moveTo--;
+                for (int j = size - 1; j > 0; j--) {
+                    if (brd.tile(i, j) == null) continue;
+                    if (brd.tile(i, j - 1) == null) continue;
+                    if (brd.tile(i, j).value() == brd.tile(i, j - 1).value()) {
+                        this.score += brd.tile(i, j).value() * 2;
+                        brd.move(i, j, brd.tile(i, j - 1));
+                    }
+                }
+                moveTo = size - 1;
+                for (int j = size - 1; j >= 0; j--) {
+                    Tile t = brd.tile(i, j);
+                    if (t == null) continue;
+                    brd.move(i, moveTo, t);
+                    moveTo--;
+                }
             }
         }
 //        changed = false;
@@ -187,7 +189,7 @@ public class Model extends Observable {
         // TODO: Fill in this function.
         for (int i=0;i<b.size();i++){
             for(int j=0;j<b.size();j++){
-                if(b.tile(i,j)==null)break;
+                if(b.tile(i,j)==null)continue;
                 if(b.tile(i,j).value()==MAX_PIECE){
                     return true;
                 }
