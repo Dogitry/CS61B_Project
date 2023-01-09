@@ -28,7 +28,7 @@ public class TimeAList {
         AList<Integer> opCounts = new AList<>();
         int N=0,time=0,opCount=0;
         Stopwatch sw = new Stopwatch();
-        int opMax = 10000000;
+        int opMax = 100000;
         int checkPoint=1000;
         for(opCount=0;opCount< opMax;opCount++) {
             L.addLast(0);
