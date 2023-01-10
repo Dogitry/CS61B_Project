@@ -10,12 +10,13 @@ public class ArrayDeque<T> implements Deque<T>{
         _size = 0;
     }
     private void insert(T item, int position){
-        T[] newItems = (T[]) new Object[items.length];
+        T[] newItems = (T[]) new Object[items.length+1];
         System.arraycopy(items,0,newItems,0,position);
         newItems[position]=item;
 
         System.arraycopy(items, position, newItems, position+1, items.length-position);
         items = newItems;
+        _size++;
     }
     private void resize(int capacity){
         T[] a = (T[]) new Object[capacity];
