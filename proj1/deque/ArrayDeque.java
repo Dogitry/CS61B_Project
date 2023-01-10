@@ -67,7 +67,7 @@ public class ArrayDeque<T> implements Deque<T>{
         T removed = items[0];
         items = newItems;
         _size--;
-        decreaseResize();
+        if(_size > 0) decreaseResize();
         return removed;
     }
 
@@ -75,7 +75,7 @@ public class ArrayDeque<T> implements Deque<T>{
     public T removeLast() {
         T removed = items[items.length-1];
         _size--;
-        decreaseResize();
+        if(_size > 0) decreaseResize();
         return removed;
     }
 
