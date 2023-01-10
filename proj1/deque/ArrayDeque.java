@@ -39,11 +39,6 @@ public class ArrayDeque<T> implements Deque<T>{
     }
 
     @Override
-    public boolean isEmpty() {
-        return _size == 0;
-    }
-
-    @Override
     public int size() {
         return _size;
     }
@@ -67,7 +62,7 @@ public class ArrayDeque<T> implements Deque<T>{
         T removed = items[0];
         items = newItems;
         _size--;
-        if(_size > 0) decreaseResize();
+        if(!isEmpty()) decreaseResize();
         return removed;
     }
 
@@ -75,13 +70,16 @@ public class ArrayDeque<T> implements Deque<T>{
     public T removeLast() {
         T removed = items[items.length-1];
         _size--;
-        if(_size > 0) decreaseResize();
+        if(!isEmpty()) decreaseResize();
         return removed;
     }
 
     @Override
     public T get(int index) {
         return items[index];
+    }
+    public void set(int index, T toSet){
+        items[index]=toSet;
     }
 
     @Override

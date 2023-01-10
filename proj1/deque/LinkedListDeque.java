@@ -39,11 +39,6 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     @Override
-    public boolean isEmpty() {
-        return _size == 0;
-    }
-
-    @Override
     public int size() {
         return _size;
     }
@@ -79,7 +74,14 @@ public class LinkedListDeque<T> implements Deque<T> {
         return L;
         //return null;
     }
-
+    @Override
+    public void set(int index,T toSet){
+        IntNode p=sentinel;
+        for(int i=0;i<index;i++){
+            p=p.next;
+        }
+        p.next.item=toSet;
+    }
     @Override
     public T get(int index) {
         IntNode p=sentinel;
